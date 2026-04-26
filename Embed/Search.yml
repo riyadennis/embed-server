@@ -1,0 +1,18 @@
+info:
+  name: Search
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:8085/search
+  body:
+    type: json
+    data: '{"query": "how does the consensus algorithm handle leader election?", "limit": 5}'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
