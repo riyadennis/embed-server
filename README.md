@@ -15,10 +15,6 @@ Each upload becomes one `file_id` shared across N points in Qdrant — one point
 
 `.txt`, `.md`, `.pdf`, `.docx`. Anything else returns `415 Unsupported Media Type`.
 
-## Note on the embedding provider
-
-You asked for the "Claude Code Go SDK" to generate embeddings — that doesn't exist. Anthropic does not offer an embeddings API; their official guidance points to Voyage AI for that. Since you picked "local model", this service uses **Ollama with `nomic-embed-text`** (768-dim). Swapping the embedder is a one-package change — `internal/embedder` is the only thing that knows about the provider.
-
 ## Prerequisites
 
 1. **Ollama** running locally with the embedding model pulled:
