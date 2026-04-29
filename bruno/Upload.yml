@@ -10,7 +10,7 @@ http:
     type: multipart-form
     data:
       - name: file
-        type: text
+        type: file
         value: ""
   auth: inherit
 

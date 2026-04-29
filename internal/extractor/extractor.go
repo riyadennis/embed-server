@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
-	"io"
 	"os"
 	"path/filepath"
 	"strings"
@@ -52,14 +51,34 @@ func extractPDF(path string) (string, error) {
 	defer f.Close()
 
 	var buf bytes.Buffer
-	reader, err := r.GetPlainText()
-	if err != nil {
-		return "", fmt.Errorf("read pdf text: %w", err)
-	}
-	if _, err := io.Copy(&buf, reader); err != nil {
-		return "", fmt.Errorf("copy pdf text: %w", err)
+	for i := 1; i <= r.NumPage(); i++ {
+		pageText := extractPDFPage(r, i)
+		if pageText != "" {
+			buf.WriteString(pageText)
+			buf.WriteByte('\n')
+		}
 	}
 	return buf.String(), nil
+}
+
+// extractPDFPage extracts text from a single page, recovering from panics
+// that the pdf library throws on malformed page streams.
+func extractPDFPage(r *pdf.Reader, pageNum int) (text string) {
+	defer func() {
+		if r := recover(); r != nil {
+			text = ""
+		}
+	}()
+
+	p := r.Page(pageNum)
+	if p.V.IsNull() {
+		return ""
+	}
+	var buf bytes.Buffer
+	for _, t := range p.Content().Text {
+		buf.WriteString(t.S)
+	}
+	return buf.String()
 }
 
 func extractDOCX(path string) (string, error) {

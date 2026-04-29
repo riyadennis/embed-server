@@ -102,7 +102,7 @@ func loadConfig() config {
 	return config{
 		HTTPAddr:         envOr("HTTP_ADDR", ":8080"),
 		OllamaURL:        envOr("OLLAMA_URL", "http://localhost:11434"),
-		OllamaModel:      envOr("OLLAMA_MODEL", "nomic-embed-text"),
+		OllamaModel:      envOr("OLLAMA_MODEL", "embeddinggemma"),
 		QdrantHost:       envOr("QDRANT_HOST", "localhost"),
 		QdrantPort:       envOrInt("QDRANT_PORT", 6334),
 		QdrantCollection: envOr("QDRANT_COLLECTION", "documents"),
