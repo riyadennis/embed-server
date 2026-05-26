@@ -1,0 +1,18 @@
+info:
+  name: GraphQL Health
+  type: graphql
+  seq: 3
+
+graphql:
+  url: http://localhost:8085/graphql
+  body: |
+    query {
+      health
+    }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

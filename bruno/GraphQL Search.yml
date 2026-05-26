@@ -1,0 +1,32 @@
+info:
+  name: GraphQL Search
+  type: graphql
+  seq: 4
+
+graphql:
+  url: http://localhost:8085/graphql
+  body: |
+    query Search($query: String!, $limit: Int) {
+      search(query: $query, limit: $limit) {
+        query
+        results {
+          score
+          fileID
+          filename
+          chunkIndex
+          text
+        }
+      }
+    }
+  variables: |
+    {
+      "query": "how does the consensus algorithm handle leader election?",
+      "limit": 5
+    }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
