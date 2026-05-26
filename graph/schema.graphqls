@@ -1,0 +1,29 @@
+type SearchResult {
+  score: Float!
+  fileID: String!
+  filename: String!
+  chunkIndex: Int!
+  text: String!
+}
+
+type UploadResult {
+  fileID: String!
+  filename: String!
+  chunks: Int!
+}
+
+type SearchResponse {
+  query: String!
+  results: [SearchResult!]!
+}
+
+type Query {
+  health: String!
+  search(query: String!, limit: Int = 5): SearchResponse!
+}
+
+scalar Upload
+
+type Mutation {
+  upload(file: Upload!): UploadResult!
+}

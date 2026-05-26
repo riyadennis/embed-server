@@ -82,6 +82,38 @@ Response:
 ### `GET /healthz`
 Liveness check.
 
+### GraphQL
+
+The same upload and search functionality is also available via GraphQL at `/graphql`.
+
+- `GET /graphql` — GraphQL Playground
+- `POST /graphql` — queries and mutations
+
+```graphql
+query { health }
+
+query {
+  search(query: "how does consensus work?", limit: 3) {
+    query
+    results { score fileID filename chunkIndex text }
+  }
+}
+
+mutation($file: Upload!) {
+  upload(file: $file) { fileID filename chunks }
+}
+```
+
+### Generate GraphQL docs
+
+Requires [SpectaQL](https://github.com/anvilco/spectaql):
+
+```bash
+npx spectaql spectaql.yaml
+```
+
+The static HTML documentation is generated into `docs/graphql/`.
+
 ## Layout
 
 ```

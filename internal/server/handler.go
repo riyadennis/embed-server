@@ -13,7 +13,11 @@ import (
 	"path/filepath"
 	"strconv"
 
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/handler/transport"
+	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/google/uuid"
+	"github.com/riyadennis/embedserver/graph"
 	"github.com/riyadennis/embedserver/internal/chunker"
 	"github.com/riyadennis/embedserver/internal/embedder"
 	"github.com/riyadennis/embedserver/internal/extractor"
@@ -37,6 +41,23 @@ func (s *Server) Routes() http.Handler {
 	mux.HandleFunc("GET /healthz", s.handleHealth)
 	mux.HandleFunc("POST /upload", s.handleUpload)
 	mux.HandleFunc("POST /search", s.handleSearch)
+
+	// GraphQL
+	gqlSrv := handler.New(graph.NewExecutableSchema(graph.Config{
+		Resolvers: &graph.Resolver{
+			Embedder:  s.Embedder,
+			Store:     s.Store,
+			ChunkConf: s.ChunkConf,
+			Logger:    s.Logger,
+		},
+	}))
+	gqlSrv.AddTransport(transport.Options{})
+	gqlSrv.AddTransport(transport.POST{})
+	gqlSrv.AddTransport(transport.MultipartForm{MaxUploadSize: maxUploadBytes})
+
+	mux.Handle("POST /graphql", gqlSrv)
+	mux.Handle("GET /graphql", playground.Handler("EmbedServer", "/graphql"))
+
 	return mux
 }
 

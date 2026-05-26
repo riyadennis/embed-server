@@ -1,0 +1,26 @@
+info:
+  name: GraphQL Upload
+  type: graphql
+  seq: 5
+
+graphql:
+  url: http://localhost:8085/graphql
+  body: |
+    mutation Upload($file: Upload!) {
+      upload(file: $file) {
+        fileID
+        filename
+        chunks
+      }
+    }
+  variables: |
+    {
+      "file": null
+    }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

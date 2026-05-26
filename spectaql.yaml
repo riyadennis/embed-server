@@ -1,0 +1,22 @@
+spectaql:
+  logoFile: ""
+  faviconFile: ""
+  displayAllServers: true
+  targetDir: docs/graphql
+
+introspection:
+  schemaFile: graph/schema.graphqls
+
+info:
+  title: EmbedServer GraphQL API
+  description: >
+    Upload documents (PDF, DOCX, TXT, MD), chunk and embed them via Ollama,
+    store in Qdrant, and search by semantic similarity.
+  version: 1.0.0
+  contact:
+    name: EmbedServer
+    url: https://github.com/riyadennis/embedserver
+
+servers:
+  - url: http://localhost:8085/graphql
+    description: Local development
