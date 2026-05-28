@@ -44,6 +44,7 @@
                   <a href="#group-Operations-Mutations">Mutations</a>
                 </h5>
                 <ul class="nav-group-section-items">
+                  <li><a href="#mutation-addText">addText</a></li>
                   <li><a href="#mutation-upload">upload</a></li>
                 </ul>
               </li>
@@ -210,7 +211,92 @@ http://localhost:8085/graphql
             </div>
           </section>
           <h1 id="group-Operations-Mutations" class="group-heading" data-traverse-target="group-Operations-Mutations">Mutations</h1>
+          <section id="mutation-addText" class="operation operation-mutation" data-traverse-target="mutation-addText">
+            <h2 class="operation-heading ">
+              <code>addText</code>
+            </h2>
+            <div class="doc-row">
+              <div class="doc-copy">
+                <div class="operation-response doc-copy-section">
+                  <h5>Response</h5>
+                  <p> Returns an <a href="#definition-UploadResult"><code>UploadResult!</code></a>
+                  </p>
+                </div>
+                <div class="operation-arguments doc-copy-section">
+                  <h5>Arguments</h5>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>text</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <span class="property-name"><code>name</code></span> - <span class="property-type"><a href="#definition-String"><code>String!</code></a></span>
+                        </td>
+                        <td>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="doc-examples">
+                <h4 class="example-heading">Example</h4>
+                <div class="example-section example-section-is-code operation-query-example">
+                  <h5>Query</h5>
+                  <pre><code class="hljs language-gql"><span class="hljs-symbol"><span class="hljs-keyword">mutation</span> addText<span class="hljs-tag">(
+  <span class="hljs-code">$text</span>:<span class="hljs-type"> String!</span>,
+  <span class="hljs-code">$name</span>:<span class="hljs-type"> String!</span>
+)</span> <span class="hljs-tag">{
+  <span class="hljs-symbol">addText<span class="hljs-tag">(
+    text: <span class="hljs-code">$text</span>,
+    name: <span class="hljs-code">$name</span>
+  )</span> <span class="hljs-tag">{
+    <span class="hljs-symbol">fileID</span>
+    <span class="hljs-symbol">filename</span>
+    <span class="hljs-symbol">chunks</span>
+  }</span></span>
+}</span></span>
+</code></pre>
+                </div>
+                <div class="example-section example-section-is-code operation-variables-example">
+                  <h5>Variables</h5>
+                  <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                </div>
+                <div class="example-section example-section-is-code operation-response-example">
+                  <h5>Response</h5>
+                  <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"addText"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"chunks"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+                </div>
+              </div>
+            </div>
+          </section>
           <section id="mutation-upload" class="operation operation-mutation" data-traverse-target="mutation-upload">
+            <div class="operation-group-name">
+              <a href="#group-Operations-Mutations">Mutations</a>
+            </div>
             <h2 class="operation-heading ">
               <code>upload</code>
             </h2>
@@ -265,8 +351,8 @@ http://localhost:8085/graphql
                   <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
   <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
     <span class="hljs-attr">"upload"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
-      <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
-      <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
       <span class="hljs-attr">"chunks"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
     <span class="hljs-punctuation">}</span>
   <span class="hljs-punctuation">}</span>
@@ -287,11 +373,6 @@ http://localhost:8085/graphql
                 </div>
               </div>
               <div class="doc-examples">
-                <div class="example-section example-section-is-code">
-                  <h5>Example</h5>
-                  <pre><code class="hljs language-json"><span class="hljs-literal"><span class="hljs-keyword">true</span></span>
-</code></pre>
-                </div>
               </div>
             </div>
           </section>
@@ -331,7 +412,7 @@ http://localhost:8085/graphql
               <div class="doc-examples">
                 <div class="example-section example-section-is-code">
                   <h5>Example</h5>
-                  <pre><code class="hljs language-json"><span class="hljs-number">987</span>
+                  <pre><code class="hljs language-json"><span class="hljs-number">123</span>
 </code></pre>
                 </div>
               </div>
@@ -437,11 +518,11 @@ http://localhost:8085/graphql
                 <div class="example-section example-section-is-code">
                   <h5>Example</h5>
                   <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">123.45</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"score"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987.65</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"chunkIndex"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span>
+  <span class="hljs-attr">"text"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>
                 </div>
@@ -529,8 +610,8 @@ http://localhost:8085/graphql
                 <div class="example-section example-section-is-code">
                   <h5>Example</h5>
                   <pre><code class="hljs language-json"><span class="hljs-punctuation">{</span>
-  <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
-  <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"fileID"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"xyz789"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"filename"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"abc123"</span><span class="hljs-punctuation">,</span>
   <span class="hljs-attr">"chunks"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">987</span>
 <span class="hljs-punctuation">}</span>
 </code></pre>

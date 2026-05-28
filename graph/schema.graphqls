@@ -26,4 +26,5 @@ scalar Upload
 
 type Mutation {
   upload(file: Upload!): UploadResult!
+  addText(text: String!, name: String!): UploadResult!
 }

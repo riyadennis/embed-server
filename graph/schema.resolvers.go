@@ -83,6 +83,50 @@ func (r *mutationResolver) Upload(ctx context.Context, file graphql.Upload) (*mo
 	}, nil
 }
 
+// AddText is the resolver for the addText field.
+func (r *mutationResolver) AddText(ctx context.Context, text string, name string) (*model.UploadResult, error) {
+	if text == "" {
+		return nil, fmt.Errorf("text is required")
+	}
+
+	chunks := chunker.Chunk(text, r.ChunkConf)
+	if len(chunks) == 0 {
+		return nil, fmt.Errorf("text produced no chunks")
+	}
+
+	vectors, err := r.Embedder.EmbedBatch(ctx, chunks)
+	if err != nil {
+		return nil, fmt.Errorf("embed: %w", err)
+	}
+
+	fileID := uuid.NewString()
+	records := make([]store.Chunk, len(chunks))
+	for i, c := range chunks {
+		records[i] = store.Chunk{
+			FileID:     fileID,
+			Filename:   name,
+			ChunkIndex: i,
+			Text:       c,
+			Vector:     vectors[i],
+		}
+	}
+
+	if err := r.Store.UpsertChunks(ctx, records); err != nil {
+		return nil, fmt.Errorf("store: %w", err)
+	}
+
+	r.Logger.Info("graphql addText complete",
+		"name", name,
+		"file_id", fileID,
+		"chunks", len(chunks))
+
+	return &model.UploadResult{
+		FileID:   fileID,
+		Filename: name,
+		Chunks:   len(chunks),
+	}, nil
+}
+
 // Health is the resolver for the health field.
 func (r *queryResolver) Health(ctx context.Context) (string, error) {
 	return "ok", nil
